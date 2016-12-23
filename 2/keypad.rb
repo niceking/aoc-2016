@@ -24,23 +24,27 @@ puts "alternate layout"
 x = 0
 y = 2
 
-legal_moves =  [[2, 0],
-        [1, 1], [2, 1], [3, 1],
-[0, 2], [1, 2], [2, 2], [3, 2], [4, 4],
-        [1, 3], [2, 3], [3, 3],
-                [2, 4]]
+final_coords = []
+
+legal_moves =               { '1' => [2, 0],
+               '2' => [1, 1], '3' => [2, 1], '4' => [3, 1],
+'5' => [0, 2], '6' => [1, 2], '7' => [2, 2], '8' => [3, 2], '9' => [4, 4],
+               'A' => [1, 3], 'B' => [2, 3], 'C' => [3, 3],
+                              'D' => [2, 4]}
 
 str.each do |line|
   line.split('').each do |st|
     if st == 'U'
-      y -= 1 if legal_moves.include?([x, y - 1])
+      y -= 1 if legal_moves.value?([x, y - 1])
     elsif st == 'D'
-      y += 1 if legal_moves.include?([x, y + 1])
+      y += 1 if legal_moves.value?([x, y + 1])
     elsif st == 'L'
-      x -= 1 if legal_moves.include?([x - 1, y])
+      x -= 1 if legal_moves.value?([x - 1, y])
     elsif st == 'R'
-      x += 1 if legal_moves.include?([x + 1, y])
+      x += 1 if legal_moves.value?([x + 1, y])
     end
   end
-  puts "#{x}, #{y}"
+  final_coords.push([x, y])
 end
+
+final_coords.each { |coord| puts legal_moves.key(coord) }
