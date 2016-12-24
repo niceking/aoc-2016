@@ -21,3 +21,19 @@ letters.each_with_index do |line, i|
 end
 
 puts answer.join
+
+puts "\nPart2\n"
+
+answer2 = Array.new(8)
+
+letters.each_with_index do |line, i|
+  count = 100
+  ('a'..'z').each do |c|
+    if line.count(c) < count
+      answer2[i] = c
+      count = line.count(c)
+    end
+  end
+end
+
+puts answer2.join
