@@ -34,3 +34,27 @@ input.each do |ips|
 end
 
 puts supported
+
+puts "\nPart 2\n"
+
+supports_ssl = 0
+
+input.each do |ips|
+  found = false
+
+  ips[:outside].each do |i|
+    (i.size - 2).times do |n|
+      if i.chars[n] == i.chars[n+2] && i.chars[n] != i.chars[n+1]
+        bab = "#{i.chars[n+1]}#{i.chars[n]}#{i.chars[n+1]}"
+        ips[:inside].each do |inner|
+          found = true if inner.include?(bab)
+        end
+      end
+    end
+  end
+  
+  supports_ssl += 1 if found
+end
+
+
+puts "#{supports_ssl} inputs support ssl"
